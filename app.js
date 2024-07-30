@@ -26,6 +26,13 @@ const inventors = [
     'Birrell, Augustine', 'Black, Elk', 'Blair, Robert', 'Blair, Tony',
     'Blake, William'
   ];
+  const devs = [
+    { name: 'Alex', year: 1988 },
+    { name: 'Dani', year: 1986 },
+    { name: 'Matt', year: 1970 },
+    { name: 'Wes', year: 2015 }
+  ];
+  
   
   const travelMethods = [
     'car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van',
@@ -55,7 +62,14 @@ born in the 1500's.
 
 let veryOldInventors = []
 
+inventors.filter(inventor => {
+  if (inventor.year >= 1500 && inventor.year < 1600) {
+    veryOldInventors.push(inventor);
+  }
+});
+
 // Complete the exercise in the space below:
+
 
 
 
@@ -84,9 +98,20 @@ Hint: Return a new object literal from the callback that looks like:
       { first: "First Name", last: "Last Name" }
 */
 
-let inventorNames = []
+let inventorNames = [];
+
+
+
 
 // Complete the exercise in the space below:
+
+function justName(inventors, inventorNames) {
+  inventors.map(inventor => { 
+    inventorNames.push({first: inventor.first, last: inventor.last});
+  }
+);
+}
+justName(inventors,inventorNames);
 
 
 
@@ -116,7 +141,7 @@ Sort the inventors by birth date in ascending order (from those born furthest in
 the past to those born most recently).
 */
 
-let sortedByBirthYear = []
+let sortedByBirthYear = inventors.sort((a, b) => a.year - b.year);
 
 // Complete the exercise in the space below:
 
@@ -155,7 +180,7 @@ from an array of inventor objects
 - Assign the found inventor object to the variable inventorNamedAda
 */
 
-let inventorNamedAda = {}
+const inventorNamedAda = inventors.find(inventor => inventor.first === 'Ada');
 
 // Complete the exercise in the space below:
 
@@ -179,8 +204,10 @@ Hint: Use the String.prototype.split() method to separate the first and last
       names. You can split the string using ', ' as the separator.
       After splitting the names, rearrange them to the "First Last" format.
 */
-
-let firstLast = []
+let firstLast = people.map(person => {
+  const [lastName, firstName] = person.split(', ');
+  return `${firstName} ${lastName}`;
+});
 
 // Complete the exercise in the space below:
 
@@ -246,13 +273,14 @@ old or older.
 - Store the result (true or false) in the variable 'isAdultPresent'. 
 */
 
-let isAdultPresent = null
 
+const currentYear = new Date().getFullYear();
+let isAdultPresent = devs.some(dev => currentYear - dev.year >= 18);
 // Complete the exercise in the space below:
 
 
 
-// Check your work:
+// Check your work:/
 console.log('Exercise 6 my result: ', isAdultPresent)
 console.log('Exercise 6 correct result: ', true)
 
@@ -273,7 +301,8 @@ let isEveryone19OrOlder = null
 
 // Complete the exercise in the space below:
 
-
+isEveryone19OrOlder =  devs.every(dev => currentYear - dev.year >= 19,
+);
 
 // Check your work:
 console.log('Exercise 7 my result: ', isEveryone19OrOlder)
@@ -291,7 +320,7 @@ a specific ID 823423 from an array of comment objects.
 let commentById = {}
 
 // Complete the exercise in the space below:
-
+commentById = comments.find( a => a.id === 823423);
 
 
 // Check your work:
@@ -310,7 +339,7 @@ of comment objects.
 let idx = null
 
 // Complete the exercise in the space below:
-
+idx = comments.findIndex(a => a.id === 123523);
 
 
 // Check your work:
